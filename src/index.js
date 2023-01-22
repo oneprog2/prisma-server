@@ -1,7 +1,6 @@
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
-import { PrismaClient } from '@prisma/client';
-
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -20,8 +19,8 @@ const resolvers = {
   Query: {
     allUsers: () => {
       return prisma.user.findMany();
-    }
-  }
+    },
+  },
 };
 
 const server = new ApolloServer({
@@ -34,7 +33,7 @@ const server = new ApolloServer({
 //  2. installs your ApolloServer instance as middleware
 //  3. prepares your app to handle incoming requests
 const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
+  listen: { port: process.env.PORT || 4000 },
 });
 
 console.log(`🚀  Server ready at: ${url}`);
